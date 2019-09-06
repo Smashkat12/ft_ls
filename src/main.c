@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:10:17 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/06 13:21:06 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/06 15:57:21 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ int			main(int ac, char *av[])
 
 	index_arg = 1; //represent current index of av
 	flags = get_flags(ac, av);
-	ft_ls(".");
+	if (index_arg == ac)
+	{
+		ft_ls(".");
+	}
+	ft_ls(av[index_arg]);
 	return (0);
 }

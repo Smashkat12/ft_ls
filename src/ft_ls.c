@@ -6,13 +6,14 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/06 13:21:08 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/06 15:57:46 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include <stdio.h>
 
-int			ft_ls(char *path)
+int				ft_ls(char *path)
 {
 	char			*path_name;
 	DIR 			*dp;
@@ -23,22 +24,28 @@ int			ft_ls(char *path)
 	path_name = ft_strjoin(path, &c);
 	ft_putstr("Directory scan of : ");
 	ft_putendl(path_name);
-	dp = opendir(path);
-	errno = 0;
-	while (1)
+	if ((dp = opendir(path)) == NULL)
 	{
-		entry = readdir(dp);
-		if (entry == NULL &&  errno != 0)
-		{
-			perror("readdir");
-			return (errno);
-		}
-		if (entry == NULL && errno == 0)
-		{
-			ft_putendl("End of directory");
-			return (0);
-		}
+		ft_putstr("Cannot open directory: ");
+		ft_putendl(path_name);
+		return (errno);
+	}
+	errno = 0;
+	while ((entry = readdir(dp)) != NULL)
+	{
 		ft_putendl(entry->d_name);
+	
+	}
+	if (entry == NULL &&  errno != 0)
+	{
+		perror("readdir Failed");
+		closedir(dp);
+		return (errno);
+	}
+	else if (entry == NULL && errno == 0)
+	{
+		ft_putendl("End of directory");
 	}
 	closedir(dp);
+	return (0);
 }
