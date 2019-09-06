@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/06 15:57:46 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/06 16:44:08 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ int				ft_ls(char *path)
 	errno = 0;
 	while ((entry = readdir(dp)) != NULL)
 	{
+		if (entry->d_name[0] == '.')
+			continue;
 		ft_putendl(entry->d_name);
-	
 	}
 	if (entry == NULL &&  errno != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:10:17 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/06 15:57:21 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/06 16:28:04 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,13 @@ int			main(int ac, char *av[])
 	{
 		ft_ls(".");
 	}
-	ft_ls(av[index_arg]);
+	else
+	{
+		while (index_arg < ac)
+		{
+			ft_ls(av[index_arg]);
+			index_arg++;
+		}
+	}
 	return (0);
 }
