@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:15 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/06 07:48:02 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/06 13:21:10 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ typedef struct	flag_s
 
 int			index_arg;
 char		char_not_flag;
+int			ft_ls(char *path);
 #endif
