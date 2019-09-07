@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:15 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/06 15:54:35 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/07 09:28:59 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,17 @@ typedef struct	flag_s
 	u_short		t;
 }				flag_t;
 
+typedef struct	pathinfo_s
+{
+		char				*pathname;
+		char				*fullpath;
+		int					IS_DIR;
+		struct stat			*statinfo;
+		struct pathinfo_s	*next;
+
+}				pathinfo_t;
 
 int			index_arg;
 char		char_not_flag;
-int			ft_ls(char *path);
+int			ft_ls(char *path, flag_t *flags);
 #endif

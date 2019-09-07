@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:10:17 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/06 16:28:04 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/07 09:29:01 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ int			main(int ac, char *av[])
 	flags = get_flags(ac, av);
 	if (index_arg == ac)
 	{
-		ft_ls(".");
+		ft_ls(".", &flags);
 	}
 	else
 	{
 		while (index_arg < ac)
 		{
-			ft_ls(av[index_arg]);
+			ft_ls(av[index_arg], &flags);
 			index_arg++;
 		}
 	}
