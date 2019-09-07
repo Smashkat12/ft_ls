@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:15 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/07 11:31:21 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/07 13:41:24 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ char		get_opts(int ac, char **av, char *flags_str);
 void		print_flag_error(void);
 flag_t		set_flags(char c, flag_t flags);
 int			ft_ls(char *path, flag_t *flags);
-int			validate_path(pathinfo_t **pathinfo_l, char *path, flag_t *flags);
+int			validate_path(char *path, flag_t *flags);
+int			check_dir(char *path);
 #endif

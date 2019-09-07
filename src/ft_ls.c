@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/07 12:02:37 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/07 14:12:03 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,17 @@ int				ft_ls(char *path, flag_t *flags)
 	char			*path_name;
 	DIR 			*dp;
 	struct dirent	*entry;
-	pathinfo_t		*pathinfo_l;
+	//pathinfo_t		*pathinfo_l;
 
-	pathinfo_l = NULL;
-	if ((validate_path(&pathinfo_l, path, flags)) != 0 )
+	dp = NULL;
+	if ((validate_path(path, flags)) != 0 )
 	{
-
+		return (0);
 	}
 	path_name = ft_strjoin(path, "/");
 	ft_putstr("Directory scan of : ");
 	ft_putendl(path_name);
-	if (!(dp = opendir(path)) == NULL)
-	{
-		ft_putstr("Cannot open directory: ");
-		ft_putendl(path_name);
-		return (errno);
-	}
+	dp = opendir(path);
 	errno = 0;
 	while ((entry = readdir(dp)) != NULL)
 	{
@@ -40,13 +35,7 @@ int				ft_ls(char *path, flag_t *flags)
 			continue;
 		ft_putendl(entry->d_name);
 	}
-	if (entry == NULL &&  errno != 0)
-	{
-		perror("readdir Failed");
-		closedir(dp);
-		return (errno);
-	}
-	else if (entry == NULL && errno == 0)
+	if (entry == NULL && errno == 0)
 	{
 		ft_putendl("End of directory");
 	}
