@@ -6,12 +6,11 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/07 09:28:42 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/07 12:02:37 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
-#include <stdio.h>
 
 int				ft_ls(char *path, flag_t *flags)
 {
@@ -20,8 +19,11 @@ int				ft_ls(char *path, flag_t *flags)
 	struct dirent	*entry;
 	pathinfo_t		*pathinfo_l;
 
+	pathinfo_l = NULL;
+	if ((validate_path(&pathinfo_l, path, flags)) != 0 )
+	{
 
-	if (validate_path(&pathinfo_l, path, flags))
+	}
 	path_name = ft_strjoin(path, "/");
 	ft_putstr("Directory scan of : ");
 	ft_putendl(path_name);
