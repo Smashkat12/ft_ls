@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 09:39:29 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/07 14:07:12 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/08 09:01:04 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				check_dir(char *path)
 	return (0);
 }
 
-int				validate_path(char *path, flag_t *flags)
+int				validate_path(char *path, flag_t *flags, pathinfo_t **pathentry_l)
 {
 	DIR			*dp;
 
@@ -44,7 +44,7 @@ int				validate_path(char *path, flag_t *flags)
 				ft_putstr(": ");
 				ft_putendl(strerror(errno));
 			}
-			if (errno == EACCES) //this value is 13, see above reference,it means Permission denied
+			else if (errno == EACCES) //this value is 13, see above reference,it means Permission denied
 			{
 				check_dir(path) && flags->R ? ft_putendl(path) : 0;
 				ft_putstr("ls: ");
@@ -57,6 +57,11 @@ int				validate_path(char *path, flag_t *flags)
 				ft_putstr(": ");
 				ft_putendl(strerror(errno));
 			}
+			else //it is some type of file that exist and not a dir so save it for late display
+			{
+				addf_tolist(path, pathentry_l);
+			}
+			
 		}
 		return (-1);
 	}

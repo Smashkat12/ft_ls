@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/07 14:12:03 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/08 08:58:53 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int				ft_ls(char *path, flag_t *flags)
 	char			*path_name;
 	DIR 			*dp;
 	struct dirent	*entry;
-	//pathinfo_t		*pathinfo_l;
+	pathinfo_t		*pathentry_l;
 
 	dp = NULL;
-	if ((validate_path(path, flags)) != 0 )
+	if ((validate_path(path, flags, &pathentry_l)) != 0 )
 	{
 		return (0);
 	}
