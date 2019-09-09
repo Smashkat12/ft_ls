@@ -6,15 +6,15 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 14:20:34 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/07 14:21:25 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/09 14:29:57 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-flag_t		init_flags(void)
+t_flag		init_flags(void)
 {
-	flag_t	flags;
+	t_flag	flags;
 
 	flags.a = 0;
 	flags.l = 0;
@@ -59,7 +59,7 @@ void		print_flag_error(void)
 	exit(1); //this is the same as exit(EXIT_FAILURE) an indicates unsuccessful termination
 }
 
-flag_t		set_flags(char c, flag_t flags)
+t_flag		set_flags(char c, t_flag flags)
 {
 	if (c == 'a')
 		flags.a = 1;
@@ -74,9 +74,9 @@ flag_t		set_flags(char c, flag_t flags)
 	return (flags);
 }
 
-flag_t		get_flags(int ac, char *av[])
+t_flag		get_flags(int ac, char *av[])
 {
-	flag_t	flags;
+	t_flag	flags;
 	char	flag_c;
 
 	flags = init_flags();

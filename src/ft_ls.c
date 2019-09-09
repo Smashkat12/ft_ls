@@ -6,18 +6,18 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/08 08:58:53 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/09 14:30:34 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int				ft_ls(char *path, flag_t *flags)
+int				ft_ls(char *path, t_flag *flags)
 {
 	char			*path_name;
 	DIR 			*dp;
 	struct dirent	*entry;
-	pathinfo_t		*pathentry_l;
+	t_pathinfo		*pathentry_l;
 
 	dp = NULL;
 	if ((validate_path(path, flags, &pathentry_l)) != 0 )

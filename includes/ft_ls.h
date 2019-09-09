@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:15 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/08 09:46:24 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/09 14:28:19 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,35 @@
 #include <stdint.h> //for uint8
 #include <unistd.h>
 
-typedef struct	flag_s
+typedef struct	s_flag
 {
 	u_short		a;
 	u_short		l;
 	u_short		R;
 	u_short		r;
 	u_short		t;
-}				flag_t;
+}				t_flag;
 
-typedef struct	pathinfo_s
+typedef struct	s_pathinfo
 {
 		char				*pathname;
 		char				*fullpath;
-		int					IS_DIR;
+		int					is_dir;
 		int					blk_total;
 		struct stat			*statinfo;
 		struct pathinfo_s	*next;
 
-}				pathinfo_t;
+}			t_pathinfo;
 
 int			index_arg;
 char		char_not_flag;
-flag_t		get_flags(int ac, char *av[]);
-flag_t		init_flags(void);
+t_flag		get_flags(int ac, char *av[]);
+t_flag		init_flags(void);
 char		get_opts(int ac, char **av, char *flags_str);
 void		print_flag_error(void);
-flag_t		set_flags(char c, flag_t flags);
-int			ft_ls(char *path, flag_t *flags);
-int			validate_path(char *path, flag_t *flags, pathinfo_t **pathentry_l);
+t_flag		set_flags(char c, t_flag flags);
+int			ft_ls(char *path, t_flag *flags);
+int			validate_path(char *path, t_flag *flags, t_pathinfo **pathentry_l);
 int			check_dir(char *path);
-int			addf_tolist(char *path, pathinfo_t **pathentry_l);
+int			addf_tolist(char *path, t_pathinfo **pathentry_l);
 #endif

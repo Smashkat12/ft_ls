@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 09:39:29 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/08 09:01:04 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/09 14:32:28 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				check_dir(char *path)
 	return (0);
 }
 
-int				validate_path(char *path, flag_t *flags, pathinfo_t **pathentry_l)
+int				validate_path(char *path, t_flag *flags, t_pathinfo **pathentry_l)
 {
 	DIR			*dp;
 
@@ -57,11 +57,10 @@ int				validate_path(char *path, flag_t *flags, pathinfo_t **pathentry_l)
 				ft_putstr(": ");
 				ft_putendl(strerror(errno));
 			}
-			else //it is some type of file that exist and not a dir so save it for late display
+			else //it is some type of file that exist and not a dir so save it for later display
 			{
 				addf_tolist(path, pathentry_l);
 			}
-			
 		}
 		return (-1);
 	}
