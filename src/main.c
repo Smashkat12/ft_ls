@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 16:10:17 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/07 14:21:38 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/09 14:40:44 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			main(int ac, char *av[])
 {
-	flag_t	flags;
+	t_flag	flags;
 
 	index_arg = 1; //represent current index of av
 	flags = get_flags(ac, av);

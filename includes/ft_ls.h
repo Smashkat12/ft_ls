@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:15 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/09 14:28:19 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/09 14:42:39 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef struct	s_pathinfo
 		char				*fullpath;
 		int					is_dir;
 		int					blk_total;
-		struct stat			*statinfo;
-		struct pathinfo_s	*next;
+		struct stat			statinfo;
+		struct s_pathinfo	*next;
 
 }			t_pathinfo;
 
