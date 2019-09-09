@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:15 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/09 14:42:39 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/09 17:35:27 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <errno.h> //for errno
 #include <sys/ioctl.h> //for TIOCGWINSZ
 #include <stdio.h> //for perror
-#include <sys/types.h> //for getpwuid
+#include <sys/types.h> //for ino_t
 #include <pwd.h>
 #include <uuid/uuid.h>
 #include <grp.h> //for getgrgid
@@ -61,7 +61,9 @@ char		get_opts(int ac, char **av, char *flags_str);
 void		print_flag_error(void);
 t_flag		set_flags(char c, t_flag flags);
 int			ft_ls(char *path, t_flag *flags);
-int			validate_path(char *path, t_flag *flags, t_pathinfo **pathentry_l);
+int			validate_path(char *path, t_flag *flags, t_pathinfo **direntry_l);
 int			check_dir(char *path);
-int			addf_tolist(char *path, t_pathinfo **pathentry_l);
+int			add_tolist(char *f_name, t_pathinfo **direntry_l, struct dirent *entry);
+int			creat_dirent_list(t_pathinfo **direntry_l, char *path, t_flag *flags);
+char		*correct_path(char *d_or_f_name, char *d_name);
 #endif
