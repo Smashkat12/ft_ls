@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 14:20:34 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/09 14:29:57 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:53:19 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@ t_flag		init_flags(void)
 	t_flag	flags;
 
 	flags.a = 0;
+	flags.A = 0;
 	flags.l = 0;
 	flags.R = 0;
 	flags.r = 0;
+	flags.f = 0;
+	flags.u = 0;
+	flags.c = 0;
 	flags.t = 0;
+
 	return(flags);
 }
 
@@ -63,6 +68,8 @@ t_flag		set_flags(char c, t_flag flags)
 {
 	if (c == 'a')
 		flags.a = 1;
+	else if (c == 'A')
+		flags.A = 1;
 	else if (c == 'l')
 		flags.l = 1;
 	else if (c == 'R')
@@ -71,6 +78,12 @@ t_flag		set_flags(char c, t_flag flags)
 		flags.r = 1;
 	else if (c == 't')
 		flags.t = 1;
+	else if (c == 'f')
+		flags.f = 1;
+	else if (c == 'u')
+		flags.u = 1;
+	else if (c == 'c')
+		flags.c = 1;
 	return (flags);
 }
 
@@ -80,7 +93,7 @@ t_flag		get_flags(int ac, char *av[])
 	char	flag_c;
 
 	flags = init_flags();
-	while ((flag_c = get_opts(ac, av, "alRrt")) != -1)
+	while ((flag_c = get_opts(ac, av, "aAlRrfuct")) != -1)
 	{
 		if (flag_c == 0)
 		{

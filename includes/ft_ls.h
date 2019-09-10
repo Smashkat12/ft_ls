@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:59:15 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/09 17:35:27 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:46:32 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,13 @@
 typedef struct	s_flag
 {
 	u_short		a;
+	u_short		A;
 	u_short		l;
 	u_short		R;
 	u_short		r;
+	u_short		f;
+	u_short		u;
+	u_short		c;
 	u_short		t;
 }				t_flag;
 
@@ -66,4 +70,11 @@ int			check_dir(char *path);
 int			add_tolist(char *f_name, t_pathinfo **direntry_l, struct dirent *entry);
 int			creat_dirent_list(t_pathinfo **direntry_l, char *path, t_flag *flags);
 char		*correct_path(char *d_or_f_name, char *d_name);
+void		sort_list(t_pathinfo **direntry_l, t_flag *flags);
+void		merge_sort(t_pathinfo **direntry_l, t_flag *flags);
+void		split(t_pathinfo *head, t_pathinfo **a, t_pathinfo **b);
+t_pathinfo	*lex_sort(t_pathinfo *a, t_pathinfo *b, t_flag *flags);
+int			timecmp(t_pathinfo *a, t_pathinfo *b, t_flag *flags);
+t_pathinfo	*lex_sort2(t_pathinfo *a, t_pathinfo *b);
+void		rev_list(t_pathinfo **direntry_l);
 #endif

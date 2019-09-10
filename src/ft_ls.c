@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/09 17:09:45 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/10 10:58:37 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int				ft_ls(char *path, t_flag *flags)
 	//char			*path_name;
 	DIR 			*dp;
 	struct dirent	*entry;
-	t_pathinfo		*pathentry_l;
+	t_pathinfo		*direntry_l;
 	int				total;
 
 	dp = NULL;
-	pathentry_l = NULL;
-	if ((validate_path(path, flags, &pathentry_l)) != 0 )
+	direntry_l = NULL;
+	if ((validate_path(path, flags, &direntry_l)) != 0 )
 	{
 		return (0);
 	}
@@ -37,7 +37,8 @@ int				ft_ls(char *path, t_flag *flags)
 			continue;
 		ft_putendl(entry->d_name);
 	}
-	total = creat_dirent_list(&pathentry_l, path, flags);
+	total = creat_dirent_list(&direntry_l, path, flags);
+	sort_list(&direntry_l, flags);
 	ft_putchar('\n');
 	ft_putstr("Total :");
 	ft_putnbr(total);

@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 09:44:48 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/09 18:03:21 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:08:51 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,16 @@ int		creat_dirent_list(t_pathinfo **direntry_l, char *path, t_flag *flags)
 	dir = opendir(path);
 	while ((entry = readdir(dir)) != NULL)
 	{
-		if (entry->d_name[0] != '.' || flags->a)
-			total += add_tolist(path, direntry_l, entry);
+		if (flags->A)
+		{
+			if (entry->d_name[0] != '.' || flags->f)
+				total += add_tolist(path, direntry_l, entry);
+		}
+		else 
+		{
+			if (entry->d_name[0] != '.' || flags->a || flags->f)
+				total += add_tolist(path, direntry_l, entry);
+		}
 	}
 	closedir(dir);
 	return (total);
