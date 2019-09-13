@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 09:26:45 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/10 14:02:14 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/13 11:50:31 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_pathinfo		*lex_sort(t_pathinfo *a, t_pathinfo *b, t_flag *flags)
 		return (b);
 	if (!b)
 		return (a);
-	if (flags->t || flags->l)
+	if (flags->t)
 	{
 		if (timecmp(a, b, flags) < 0)
 		{

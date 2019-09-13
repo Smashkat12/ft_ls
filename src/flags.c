@@ -6,7 +6,7 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 14:20:34 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/10 13:53:19 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/12 16:22:27 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_flag		init_flags(void)
 	flags.u = 0;
 	flags.c = 0;
 	flags.t = 0;
+	flags.one = 0;
 
 	return(flags);
 }
@@ -78,6 +79,8 @@ t_flag		set_flags(char c, t_flag flags)
 		flags.r = 1;
 	else if (c == 't')
 		flags.t = 1;
+	else if (c == '1')
+		flags.one = 1;
 	else if (c == 'f')
 		flags.f = 1;
 	else if (c == 'u')
@@ -93,7 +96,7 @@ t_flag		get_flags(int ac, char *av[])
 	char	flag_c;
 
 	flags = init_flags();
-	while ((flag_c = get_opts(ac, av, "aAlRrfuct")) != -1)
+	while ((flag_c = get_opts(ac, av, "aAlRrfuct1")) != -1)
 	{
 		if (flag_c == 0)
 		{

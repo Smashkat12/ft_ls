@@ -6,47 +6,56 @@
 /*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/10 10:58:37 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/13 12:02:05 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int				ft_ls(char *path, t_flag *flags)
+static void	recur(t_pathinfo *direntry_l, t_flag *flags)
 {
-	//char			*path_name;
-	DIR 			*dp;
-	struct dirent	*entry;
-	t_pathinfo		*direntry_l;
-	int				total;
+	while (direntry_l)
+	{
+		if (direntry_l->is_dir && ft_strcmp(direntry_l->pathname, ".") && ft_strcmp(direntry_l->pathname, ".."))
+		{
+			ft_putchar('\n');
+			ft_ls(direntry_l->fullpath, flags);
+		}
+		direntry_l = direntry_l->next;
+	}
+}
 
-	dp = NULL;
+int				ft_ls(char *fullpath, t_flag *flags)
+{
+	t_pathinfo		*direntry_l;
+	t_pathinfo		*check_direntry_l;
+	int				total;
+	static int 		subdir;
+
 	direntry_l = NULL;
-	if ((validate_path(path, flags, &direntry_l)) != 0 )
+	if ((validate_path(fullpath, flags, &direntry_l)) != 0 )
 	{
 		return (0);
 	}
-	/*path_name = ft_strjoin(path, "/");
-	ft_putstr("Directory scan of : ");
-	ft_putendl(path_name);*/
-	dp = opendir(path);
-	errno = 0;
-	while ((entry = readdir(dp)) != NULL)
-	{
-		if (entry->d_name[0] == '.')
-			continue;
-		ft_putendl(entry->d_name);
-	}
-	total = creat_dirent_list(&direntry_l, path, flags);
+	total = creat_dirent_list(&direntry_l, fullpath, flags);
 	sort_list(&direntry_l, flags);
-	ft_putchar('\n');
-	ft_putstr("Total :");
-	ft_putnbr(total);
-	ft_putchar('\n');
-	/*if (entry == NULL && errno == 0)
+	if (subdir && flags->R)
 	{
-		ft_putendl("End of directory");
-	}*/
-	closedir(dp);
+		ft_putchar('\n');
+		(!direntry_l) ? ft_putstr(fullpath) : ft_putendl(fullpath);
+	}
+	if (direntry_l && flags->l)
+	{
+		ft_putstr("total ");
+		ft_putnbr(total);
+		ft_putchar('\n');
+	}
+	check_direntry_l = direntry_l;
+	print_direntries(check_direntry_l, flags);
+	ft_putchar('\n');
+	subdir = 1;
+	if (flags->R)
+		recur(check_direntry_l, flags);
+	free_list(&direntry_l);
 	return (0);
 }
