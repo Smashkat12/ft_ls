@@ -6,7 +6,7 @@
 /*   By: kmorulan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 10:53:12 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/13 18:09:41 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/14 09:36:05 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int					ft_ls(char *fullpath, t_flag *flags)
 		return (0);
 	total = creat_dirent_list(&direntry_l, fullpath, flags);
 	sort_list(&direntry_l, flags);
-	if (subdir && flags->R)
+	if (subdir && flags->cap_r)
 	{
 		ft_putchar('\n');
 		(!direntry_l) ? ft_putstr(fullpath) : ft_putendl(fullpath);
@@ -56,7 +56,7 @@ int					ft_ls(char *fullpath, t_flag *flags)
 	print_direntries(check_direntry_l, flags);
 	ft_putchar('\n');
 	subdir = 1;
-	if (flags->R)
+	if (flags->cap_r)
 		recur(check_direntry_l, flags);
 	free_list(&direntry_l);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: kmorulan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 16:32:00 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/13 18:11:35 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/14 08:23:04 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,33 @@ void			print_permissions(t_pathinfo *list)
 		ft_putchar('+');
 	else
 		ft_putchar(' ');
+}
+
+void			print_list(t_pathinfo *direntry_l, t_flag *flags)
+{
+	if (flags->l)
+	{
+		print_type(direntry_l);
+		print_permissions(direntry_l);
+		print_link_count(direntry_l);
+		ft_putstr(getpwuid(direntry_l->statinfo.st_uid)->pw_name);
+		ft_putchar('\t');
+		ft_putstr(getgrgid(direntry_l->statinfo.st_gid)->gr_name);
+		ft_putchar('\t');
+		if (S_ISBLK(direntry_l->statinfo.st_mode) || \
+		S_ISCHR(direntry_l->statinfo.st_mode))
+		{
+			ft_putnbr(major(direntry_l->statinfo.st_rdev));
+			ft_putstr("  \t");
+			ft_putnbr(minor(direntry_l->statinfo.st_rdev));
+		}
+		else
+			ft_putnbr(direntry_l->statinfo.st_size);
+		ft_putstr("  ");
+		print_date(direntry_l, flags);
+		print_name(direntry_l, 0, flags);
+		(S_ISLNK(direntry_l->statinfo.st_mode)) ? print_link(direntry_l) : 0;
+	}
+	else
+		print_name(direntry_l, 1, flags);
 }

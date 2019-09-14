@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   path_entry_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmorulan <kmorulan@student.wethinkcode.    +#+  +:+       +#+        */
+/*   By: kmorulan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 09:44:48 by kmorulan          #+#    #+#             */
-/*   Updated: 2019/09/10 13:08:51 by kmorulan         ###   ########.fr       */
+/*   Updated: 2019/09/14 09:30:31 by kmorulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-
-int		creat_dirent_list(t_pathinfo **direntry_l, char *path, t_flag *flags)
+int					creat_dirent_list(t_pathinfo **direntry_l, \
+char *path, t_flag *flags)
 {
 	DIR				*dir;
 	struct dirent	*entry;
@@ -23,12 +23,12 @@ int		creat_dirent_list(t_pathinfo **direntry_l, char *path, t_flag *flags)
 	dir = opendir(path);
 	while ((entry = readdir(dir)) != NULL)
 	{
-		if (flags->A)
+		if (flags->cap_a)
 		{
 			if (entry->d_name[0] != '.' || flags->f)
 				total += add_tolist(path, direntry_l, entry);
 		}
-		else 
+		else
 		{
 			if (entry->d_name[0] != '.' || flags->a || flags->f)
 				total += add_tolist(path, direntry_l, entry);
@@ -37,14 +37,16 @@ int		creat_dirent_list(t_pathinfo **direntry_l, char *path, t_flag *flags)
 	closedir(dir);
 	return (total);
 }
-char	*correct_path(char *d_or_f_name, char *d_name)
-{
-	char	*temp;
-	char	*temp2;
 
-	if (!d_name) //if no directory name -> NULL
+char				*correct_path(char *d_or_f_name, char *d_name)
+{
+	char			*temp;
+	char			*temp2;
+
+	if (!d_name)
 	{
-		if (d_or_f_name[0] == '~' || d_or_f_name[0] == '/' || d_or_f_name[0] == '.') // the ~ is for user home directory and / is for root dir and . is current dir
+		if (d_or_f_name[0] == '~' || d_or_f_name[0] == '/' \
+		|| d_or_f_name[0] == '.')
 			return (ft_strdup(d_or_f_name));
 		return (ft_strjoin("./", d_or_f_name));
 	}
@@ -54,7 +56,7 @@ char	*correct_path(char *d_or_f_name, char *d_name)
 	return (temp2);
 }
 
-static void		perror_free(t_pathinfo **temp)
+static void			perror_free(t_pathinfo **temp)
 {
 	ft_putstr("ls: ");
 	perror((*temp)->fullpath);
@@ -63,9 +65,10 @@ static void		perror_free(t_pathinfo **temp)
 	free(*temp);
 }
 
-int			add_tolist(char *d_or_f_name, t_pathinfo **direntry_l, struct dirent *entry)
+int					add_tolist(char *d_or_f_name, t_pathinfo **direntry_l, \
+struct dirent *entry)
 {
-	t_pathinfo	*temp;
+	t_pathinfo		*temp;
 
 	if (!(temp = malloc(sizeof(t_pathinfo))))
 		return (-1);
@@ -81,12 +84,12 @@ int			add_tolist(char *d_or_f_name, t_pathinfo **direntry_l, struct dirent *entr
 		temp->pathname = ft_strdup(d_or_f_name);
 		temp->fullpath = correct_path(d_or_f_name, NULL);
 	}
-	if (lstat(temp->fullpath, &(temp->statinfo)) == -1) //used lstat over stat to differentiate files vs symbolic links
+	if (lstat(temp->fullpath, &(temp->statinfo)) == -1)
 	{
 		perror_free(&temp);
 		return (0);
 	}
 	temp->next = *direntry_l;
 	*direntry_l = temp;
-	return (temp->statinfo.st_blocks); //The actual number of blocks allocated for the file in 512-byte units or 0 for symbolic links
+	return (temp->statinfo.st_blocks);
 }
